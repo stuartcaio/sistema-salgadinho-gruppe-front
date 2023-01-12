@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './css/reset.css';
+import { Botão, BotãoOff, Cabecalho, Corpo, Principal, Subtítulo, Texto, Título } from './styled-components/homeStyled';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Corpo>
+      <Cabecalho>
+          <BotãoOff>
+            <Link to="/registro" style={{textDecoration: 'none', color: 'inherit'}}>
+              Registrar
+            </Link>
+          </BotãoOff>
+          <Botão>
+            <Link to="/login" style={{textDecoration: 'none', color: 'inherit'}}>
+              Login
+            </Link>
+          </Botão>
+      </Cabecalho>
+      <Principal>
+        <Texto>
+          <Título>Sistema de Salgadinho</Título>
+          <Subtítulo>Gruppe Tecnologia</Subtítulo>
+        </Texto>
+      </Principal>
+    </Corpo>
+    </>
   );
 }
 
