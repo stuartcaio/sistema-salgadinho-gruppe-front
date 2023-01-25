@@ -27,7 +27,7 @@ function Lateral(){
                     {item.titulo === 'Sair' &&
                         <Item onClick={() => {
                             sair();
-                        }}>
+                        }} key={item.id}>
                             <Imagem src={item.imagem} />
                             <Título>{item.titulo}</Título>
                         </Item>
@@ -36,14 +36,14 @@ function Lateral(){
                     {item.titulo != 'Sair' &&
                         <Link to={`/${item.titulo}`} style={{textDecoration: 'none', color: 'inherit'}}>
                             {item.id === '1' &&
-                                <Item style={{borderTop: '1px solid black'}}>
+                                <Item style={{borderTop: '1px solid black'}} key={item.id}>
                                     <Imagem src={item.imagem} />
                                     <Título>{item.titulo}</Título>
                                 </Item>
                             }
 
                             {item.id != "1" &&
-                                <Item>
+                                <Item key={item.id}>
                                     <Imagem src={item.imagem} />
                                     <Título>{item.titulo}</Título>
                                 </Item>

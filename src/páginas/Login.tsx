@@ -8,9 +8,7 @@ function Login(){
     const [email, setEmail] = useState<string>();
     const [senha, setSenha] = useState<string>();
 
-    const token = sessionStorage.getItem('token');
-
-    function aoEnviar(e: HTMLFormElement){
+    function aoEnviar(e: any){
         e.preventDefault();
 
         const usuario = {
@@ -20,10 +18,11 @@ function Login(){
 
         api.post('logar', usuario).then((resposta) => {
             if(resposta.data.user.nome == 'Caio Weber Stuart' && resposta.data.user.email == 'caiostuart06@gmail.com'){
-                sessionStorage.setItem('tokenXandão', resposta.data.tokenXandão);
+                sessionStorage.setItem('tokenXandão', resposta.data.token);
             } else{
                 sessionStorage.setItem('token', resposta.data.token);
             }
+
             setEmail('');
             setSenha('');
             window.location.href='/sistema';
@@ -46,7 +45,7 @@ function Login(){
             </Formulário>
         </Corpo>
         </>
-    )
+    );
 }
 
 export default Login;

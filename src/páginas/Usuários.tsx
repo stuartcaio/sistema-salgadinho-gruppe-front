@@ -29,7 +29,7 @@ function Usuários(){
                 <Usuarios>
                     {usuarios.map((usuario) => 
                         usuario.id <= 6 &&
-                            <Usuário>
+                            <Usuário key={usuario.id}>
                                 <Info>Nome: {usuario.nome}</Info> 
                                 <Info>Data de Nascimento: {usuario.dataDeNascimento.slice(0, 10)}</Info>
                                 <Info>Data de Emissão: {usuario.dataDeEmissão.slice(0, 10)}</Info>

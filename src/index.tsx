@@ -11,13 +11,14 @@ import UsuáriosAdmin from './páginas/UsuáriosAdmin';
 import Usuários from './páginas/Usuários';
 import AllUsers from './páginas/AllUsers';
 import Agenda from './páginas/Agenda'; 
+import SemPermissão from './páginas/SemPermissão';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const token = sessionStorage.getItem('token');
-const tokenXandão = sessionStorage.getItem('tokenXandão');
+export const token = sessionStorage.getItem('token');
+export const tokenXandão = sessionStorage.getItem('tokenXandão');
 const usuarioEstaLogado = (token != null || tokenXandão != null);
 const admEstaLogado = (tokenXandão != null);
 
@@ -32,6 +33,8 @@ function verificaAutenticacao(componente: any){
 function verificaAutenticacaoAdmin(componente: any){
   if(admEstaLogado){
     return componente;
+  } else{
+    return <SemPermissão />
   }
 }
 

@@ -24,7 +24,7 @@ function AllUsers(){
         <Corpo style={{backgroundColor: 'white'}}>
             <Usuarios>
                 {usuarios.map((usuario) => 
-                        <Usuário>
+                        <Usuário key={usuario.id}>
                             <Info>Nome: {usuario.nome}</Info> 
                             <Info>Data de Nascimento: {usuario.dataDeNascimento}</Info>
                             <Info>Data de Emissão: {usuario.dataDeEmissão}</Info>

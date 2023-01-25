@@ -13,7 +13,7 @@ function Empresas(){
             <Principal>
                 <Lista>
                 {empresas.map((empresa) => (
-                    <Empresa>
+                    <Empresa key={empresa.id}>
                         <Imagem src={empresa.imagem} />
                         <Título>{empresa.nome}</Título>
                         <Número>

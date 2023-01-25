@@ -10,25 +10,13 @@ import Modal from "../componentes/Modal";
 import 'react-toastify/dist/ReactToastify.css';
 import api from "../Api";
 import moment from 'moment';
+import { token } from "..";
 
 function Agenda(){
     const [datas, setDatas] = useState<any[]>([]);
     const [dataSelecionada, setDataSelecionada] = useState(new Date());
     const [modalEhVisivel, setModalEhVisivel] = useState<boolean>(false);
     const [texto, setTexto] = useState<string>();
-
-    function info(mensagem: string){
-        toast.info(`${mensagem}`, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            className: 'toast'
-        })
-    }
 
     function days(date: any){
         let day = date.getDate();
@@ -46,7 +34,7 @@ function Agenda(){
         return null
     }
 
-    function emiteInformacao(dataSelecionada: any){
+    function emiteInformacao(dataSelecionada: string){
         const existe = datas.find((data: any) => {
             return data.data.slice(0, 10) === dataSelecionada
         })
@@ -59,7 +47,11 @@ function Agenda(){
     }
 
     function consultaData(){
-        api.get('datas').then(({data}) => {
+        api.get('datas', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(({data}) => {
             setDatas(data)
         });
     }

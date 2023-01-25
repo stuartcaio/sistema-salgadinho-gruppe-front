@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import api from '../Api';
 import '../css/reset.css';
 import { Botão } from '../styled-components/homeStyled';
 import { Corpo, Título, Formulário, Info, Input } from '../styled-components/registroStyled';
@@ -7,10 +8,16 @@ function Edição(){
 
     const {id} = useParams();
 
+    function aoEnviar(e: any, id: any){
+        e.preventDefault();
+        
+        api.post(`editar/${id}`);
+    }
+
     return(
         <>
         <Corpo>
-            <Formulário action={`http://localhost:8080/editar/${id}`} method='post' style={{gap: '1.5rem', height: '25rem'}}>
+            <Formulário onSubmit={(e: any) => aoEnviar(e, id)} method='post' style={{gap: '1.5rem', height: '25rem'}}>
             <Info>
                     <Título>Nome:</Título>
                     <Input placeholder="Insira o seu nome" name="nome" required />

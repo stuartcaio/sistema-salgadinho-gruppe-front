@@ -10,33 +10,41 @@ function UsuáriosAdmin(){
 
     const [usuarios, setUsuarios] = useState<any[]>([]);
 
+    const token = sessionStorage.getItem('tokenXandão') || undefined;
+
     async function consultaUsuários(){
-        await api.get('users').then(({data}) => {
+        await api.get('usersADM').then(({data}) => {
             setUsuarios(data);
-        });
+        })
     }
 
     useEffect(() => {
         consultaUsuários();
     }, []);
 
+    function aoEnviar(e: any, id: any){
+        e.preventDefault();
+
+        api.get(`excluir/${id}`);
+    }
+
     return(
         <>
         <Corpo>
             <Logins>
-                {usuarios.map((usuário) => (
-                    <Login>
-                        <Info>Nome: {usuário.nome}</Info>
-                        <Info>E-mail: {usuário.email}</Info>
-                        <Info>Senha: {usuário.senha}</Info>
-                        <Info>Data de nascimento: {usuário.dataDeNascimento}</Info>
-                        <Info>Data de emissão: {usuário.dataDeEmissão}</Info>
+                {usuarios.map((usuario) => (
+                    <Login key={usuario.id}>
+                        <Info>Nome: {usuario.nome}</Info>
+                        <Info>E-mail: {usuario.email}</Info>
+                        <Info>Senha: {usuario.senha}</Info>
+                        <Info>Data de nascimento: {usuario.dataDeNascimento}</Info>
+                        <Info>Data de emissão: {usuario.dataDeEmissão}</Info>
 
                         <Botões>
-                            <form action={`http://localhost:8080/excluir/${usuário.id}`} method="delete">
+                            <form onSubmit={(e: any) => aoEnviar(e, usuario.id)} method="delete">
                                 <Botão type='submit'>Excluir</Botão>
                             </form>   
-                            <Link to={`/usuários/editar/${usuário.id}`}>
+                            <Link to={`/usuários/editar/${usuario.id}`}>
                                 <Botão type='submit'>Editar</Botão>
                             </Link>
                         </Botões>
